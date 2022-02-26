@@ -1,10 +1,12 @@
 import react from 'react';
+import TodoListForm from '../todoListForm/TodoListForm';
 
 
-const TodoList = (props: any) => {
+const TodoList = () => {
     return (
         <div>
-            <h1>Todo List</h1>
+            <h1 className='todo-list-h1'>Todo List</h1>
+            <TodoListForm />
             {
                 /*
             <ul>
