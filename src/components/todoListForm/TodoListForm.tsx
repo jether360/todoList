@@ -1,16 +1,23 @@
-import react from "react";
-import { Card, Col, Layout, Row, Button } from "antd";
+import React  from "react";
+import { Card, Col, Layout, Row } from "antd";
 import * as Yup from "yup";
 import { Form, Input, SubmitButton } from "formik-antd";
 import { Formik } from "formik";
+//import TodoStore from "../api/store/TodoStore";
+import { ITodoItem } from "../api/models/todoList";
+import { useStore } from "../api/store/store"; 
 
 const validationSchema = Yup.object().shape({
   todo: Yup.string().required("Required"),
 });
 
 const { Content } = Layout;
+//const {createTodo} = TodoStore;
+const TodoListForm = () => {
+ const {todoStore} = useStore();
+  const {createTodo} = todoStore;
 
-const TodoListForm = () => (
+ return(
   <Layout
     className="layout"
     style={{ height: "100vh", backgroundColor: "#fff", marginTop: "20px" }}
@@ -27,8 +34,12 @@ const TodoListForm = () => (
             <Formik
               validationSchema={validationSchema}
               initialValues={{ todo: "" }}
-              onSubmit={(values) => {
-                console.log(values);
+              onSubmit={(values: ITodoItem) => {
+                if(values.todo != null){
+                  createTodo(values.todo);
+                  console.log(values.todo);
+                }
+                //console.log(values);
               }}
             >
               {() => (
@@ -52,6 +63,7 @@ const TodoListForm = () => (
       </Row>
     </Content>
   </Layout>
-);
+  )
+};
 
 export default TodoListForm;
