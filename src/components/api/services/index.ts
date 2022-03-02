@@ -1,6 +1,8 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 
 const BASE_URL = "https://localhost:5001/api/";
+
+axios.defaults.baseURL = BASE_URL;
 
 export const createAPIEndpoint = (endpoint: string) => {
     
@@ -14,3 +16,4 @@ export const createAPIEndpoint = (endpoint: string) => {
         delete: (id: number) => axios.delete(url + id)
     }
 }
+

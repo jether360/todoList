@@ -34,9 +34,11 @@ const TodoListForm = () => {
             <Formik
               validationSchema={validationSchema}
               initialValues={{ todo: "" }}
-              onSubmit={(values: ITodoItem) => {
+              onSubmit={(values: ITodoItem, {resetForm}) => {
                 if(values.todo != null){
-                  createTodo(values.todo);
+                  createTodo(values);
+                  alert("Todo added successfully");
+                  resetForm();
                   console.log(values.todo);
                 }
                 //console.log(values);
