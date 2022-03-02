@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Repo\\todo-list\\api\\API.csproj": {}
+    "C:\\Repo\\todoList\\api\\API.csproj": {}
   },
   "projects": {
-    "C:\\Repo\\todo-list\\api\\API.csproj": {
+    "C:\\Repo\\todoList\\api\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Repo\\todo-list\\api\\API.csproj",
+        "projectUniqueName": "C:\\Repo\\todoList\\api\\API.csproj",
         "projectName": "API",
-        "projectPath": "C:\\Repo\\todo-list\\api\\API.csproj",
+        "projectPath": "C:\\Repo\\todoList\\api\\API.csproj",
         "packagesPath": "C:\\Users\\Jether\\.nuget\\packages\\",
-        "outputPath": "C:\\Repo\\todo-list\\api\\obj\\",
+        "outputPath": "C:\\Repo\\todoList\\api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Jether\\AppData\\Roaming\\NuGet\\NuGet.Config",
