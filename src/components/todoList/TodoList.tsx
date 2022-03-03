@@ -3,18 +3,21 @@ import TodoListForm from "../todoListForm/TodoListForm";
 import { useStore } from "../api/store/store";
 import Todo from "../api/services/todoListService";
 import {ITodoItem} from "../api/models/todoList";
+import { observer } from "mobx-react";
 
 const TodoList = () => {
   const { todoStore } = useStore();
-  const { todoList } = todoStore;
+  const { todoList,todos } = todoStore;
 
-  useEffect(()=>{
-    console.log(todoList)
-  },[])
-
+  
   return (
     <div>
       <h1 className="todo-list-h1">Todo List</h1>
+      <ul>
+        {todos.map((todo, index)=>{
+          return <li key={index}>{todo.todo}</li>
+        })}
+      </ul>
       <TodoListForm />
       {/*
             <ul>
@@ -30,4 +33,4 @@ const TodoList = () => {
     </div>
   );
 };
-export default TodoList;
+export default observer(TodoList);

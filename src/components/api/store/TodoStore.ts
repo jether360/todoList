@@ -4,7 +4,7 @@ import { ITodoItem, ITodoList } from "../models/todoList";
 
 class TodoStore {
   // todos: TodoItem[] = [];
-  todos: ITodoItem | undefined = {} as ITodoItem;
+  todos: ITodoItem[] = [];
   todoList: ITodoList[] = [];
   //todoList: ITodoItem[] = [];
   constructor() {
@@ -15,11 +15,21 @@ class TodoStore {
     });
   }
 
+ // createTodo = async (todo: any) => {
+  //  try {
+   //   if (todo != null) {
+   //     const response = await Todo.createTodo(todo);
+   //     this.todos = [response];
+  //    }
+  //  } catch (error) {
+   //   console.log(error);
+  //  }
+  //};
   createTodo = async (todo: any) => {
     try {
       if (todo != null) {
         const response = await Todo.createTodo(todo);
-        this.todos = response;
+        this.todos.push(response);
       }
     } catch (error) {
       console.log(error);
@@ -29,7 +39,7 @@ class TodoStore {
    getAllTodo = async () => {
     try {
        const response = await Todo.getAllTodos();
-     this.todoList = [response];
+     this.todos = [response];
      } catch (error) {
       console.log(error);
    }
