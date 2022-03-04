@@ -20,7 +20,7 @@ const TodoListForm = () => {
   return (
     <Layout
       className="layout"
-      style={{ height: "100vh", backgroundColor: "#fff", marginTop: "20px" }}
+      style={{  backgroundColor: "#fff", marginTop: "20px" }}
     >
       <Content>
         <Row justify="center" style={{ height: "100%" }}>

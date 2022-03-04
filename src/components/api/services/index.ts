@@ -2,12 +2,15 @@ import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 
 const BASE_URL = "https://localhost:5001/api/";
 
-axios.defaults.baseURL = BASE_URL;
+export const ENDPOINTS ={
+    TODOLIST: 'TodoList'
+}
 
 export const createAPIEndpoint = (endpoint: string) => {
     
     let url = BASE_URL + endpoint + '/';
 
+   
     return{
         getAll: () => axios.get(url),
         getById: (id: number) => axios.get(url + id),
