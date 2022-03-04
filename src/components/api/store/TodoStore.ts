@@ -52,5 +52,14 @@ class TodoStore {
    }
    };
 
+   updateTodo = async (id: number, values: ITodoItem) => {
+    try {
+      const response = await Todo.update(id, values);
+      this.todos = [response];
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
 }
 export default TodoStore;

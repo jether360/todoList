@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import TodoListForm from "../todoListForm/TodoListForm";
 import { useStore } from "../api/store/store";
 //import Todo from "../api/services/todoListService";
-import {ITodoItem} from "../api/models/todoList";
 import { observer } from "mobx-react";
 import { createAPIEndpoint, ENDPOINTS } from "../api/services";
+import { Card, Col, Layout, Row } from "antd";
 
 const TodoList = () => {
   const { todoStore } = useStore();
@@ -22,21 +22,25 @@ const TodoList = () => {
     })
    
     .catch(err => console.log(err))
-  })
+  },[])
   
   return (
     <div>
       <h1 className="todo-list-h1">Todo List</h1>
       <TodoListForm />
-      <ul>
+      
         {todos.map((item,index)=>{
           return(
-            <li key={index}>
-              {item.todo}
-            </li>
+            <Row justify="center">
+            <h3 key={index} className="list" onClick={()=>{
+              alert('hi');
+            }}>
+              {index+1+". "}{item.todo}
+            </h3>
+            </Row>
           )
         })}
-      </ul>
+      
       {/*
             <ul>
                 {props.todos.map((todo: any) => {

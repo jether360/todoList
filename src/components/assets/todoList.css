@@ -29,4 +29,14 @@
   border-radius: 8px;
   width: 100%;
 }
+
+.list {
+  margin-top: 10px;
+  border: 2px solid #00BCD4;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border-radius: 8px;
+  width: 25%;
+}
 /*# sourceMappingURL=todoList.css.map */
