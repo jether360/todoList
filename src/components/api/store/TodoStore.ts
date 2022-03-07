@@ -1,13 +1,13 @@
 import { action, makeObservable, observable, runInAction } from "mobx";
 import Todo from "../services/todoListService";
-import { ITodoItem, ITodoList } from "../models/todoList";
+import { ITodoItem, ITodoList,TodoFormValues } from "../models/todoList";
 
 class TodoStore {
   // todos: TodoItem[] = [];
   todos: ITodoItem[] = [] as ITodoItem[];
   todoList: ITodoList[] = [];
   //todoList: ITodoItem[] = [];
-  
+  todoForm: ITodoItem = new TodoFormValues();
 
   constructor() {
     makeObservable(this, {
@@ -37,6 +37,25 @@ class TodoStore {
    //   console.log(error);
   //  }
  /// };
+
+ setTodoForm = (id?:any) => {
+   // this.todoForm = new TodoFormValues();
+   // if(id){
+    //  this.todoForm.id = id;
+    //}
+    try {
+      if(id){
+        const todoForm = this.todos.find((x) => x.id === id);
+
+        runInAction(()=>{
+          this.todoForm = new TodoFormValues(todoForm);
+        })
+      }
+    } catch (error) {
+      
+    }
+
+ }
  setTodo = (values:any)=>{
   runInAction(()=>{
     this.todos = values;
@@ -59,6 +78,16 @@ class TodoStore {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  deleteTodo =async (id:any) => {
+      try {
+        const response = await Todo.deleteTodo(id);
+        this.todos = [response];
+        window.location.reload();
+      } catch (error) {
+        console.log(error);
+      }
   }
 
 }

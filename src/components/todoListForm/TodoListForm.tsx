@@ -6,6 +6,11 @@ import { Formik } from "formik";
 //import TodoStore from "../api/store/TodoStore";
 import { ITodoItem } from "../api/models/todoList";
 import { useStore } from "../api/store/store";
+import { observer } from "mobx-react";
+
+type IProps = {
+  id?: string;
+};
 
 const validationSchema = Yup.object().shape({
   todo: Yup.string().required("Required"),
@@ -15,7 +20,7 @@ const { Content } = Layout;
 //const {createTodo} = TodoStore;
 const TodoListForm = () => {
   const { todoStore } = useStore();
-  const { createTodo } = todoStore;
+  const { createTodo, todoForm } = todoStore;
 
   return (
     <Layout
@@ -33,12 +38,13 @@ const TodoListForm = () => {
             <Card className="todo-list-card">
               <Formik
                 validationSchema={validationSchema}
-                initialValues={{ todo: "" }}
+                initialValues={todoForm}
                 onSubmit={(values: ITodoItem, { resetForm }) => {
                   if (values.todo != null) {
                     createTodo(values);
-                    alert("Todo added successfully");
+                   // alert("Todo added successfully");
                     resetForm();
+                    window.location.reload();
                     console.log(values.todo);
                   }
                 }}
@@ -71,4 +77,4 @@ const TodoListForm = () => {
   );
 };
 
-export default TodoListForm;
+export default observer(TodoListForm);
