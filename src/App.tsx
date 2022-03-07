@@ -2,6 +2,7 @@ import React from 'react';
 //import logo from './logo.svg';
 //import './App.css';
 import TodoList from "../src/components/todoList/TodoList";
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 function App() {
   return (
@@ -23,7 +24,15 @@ function App() {
         </a>
         */
         }
-        <TodoList/>
+         
+         <Router>
+      <div >
+        <Switch>
+        <Route path="/" exact component = {TodoList}/>
+        <Route path="/update:id" exact component = {TodoList}/>
+        </Switch>
+      </div>
+      </Router>
       </header>
     </div>
   );

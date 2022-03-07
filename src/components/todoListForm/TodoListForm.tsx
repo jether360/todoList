@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Card, Col, Layout, Row } from "antd";
 import * as Yup from "yup";
 import { Form, Input, SubmitButton } from "formik-antd";
@@ -8,9 +8,13 @@ import { ITodoItem } from "../api/models/todoList";
 import { useStore } from "../api/store/store";
 import { observer } from "mobx-react";
 
-type IProps = {
-  id?: string;
-};
+//type IParams = {
+ // match: {
+  //  params: {
+  //    id: number;
+  //  };
+ // };
+//};
 
 const validationSchema = Yup.object().shape({
   todo: Yup.string().required("Required"),
@@ -20,7 +24,11 @@ const { Content } = Layout;
 //const {createTodo} = TodoStore;
 const TodoListForm = () => {
   const { todoStore } = useStore();
-  const { createTodo, todoForm } = todoStore;
+  const { createTodo, todoForm, setTodoForm } = todoStore;
+
+  //useEffect(()=>{
+    //setTodoForm(id)
+  //}, [id, setTodoForm]);
 
   return (
     <Layout
@@ -37,6 +45,7 @@ const TodoListForm = () => {
             ></Row>
             <Card className="todo-list-card">
               <Formik
+               enableReinitialize
                 validationSchema={validationSchema}
                 initialValues={todoForm}
                 onSubmit={(values: ITodoItem, { resetForm }) => {

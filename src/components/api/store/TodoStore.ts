@@ -14,6 +14,7 @@ class TodoStore {
       todos: observable,
       createTodo: action,
       getAllTodo:action,
+      deleteTodo:action
     });
   }
 
@@ -27,35 +28,22 @@ class TodoStore {
       console.log(error);
     }
   };
- // createTodo = async (todo: any) => {
-   // try {
-    //  if (todo != null) {
-    //    const response = await Todo.createTodo(todo);
-    //    this.todos.push(response);
-   //   }
-   // } catch (error) {
-   //   console.log(error);
-  //  }
- /// };
 
- setTodoForm = (id?:any) => {
-   // this.todoForm = new TodoFormValues();
-   // if(id){
-    //  this.todoForm.id = id;
-    //}
+ setTodoForm = (id:any) => {
     try {
       if(id){
-        const todoForm = this.todos.find((x) => x.id === id);
-
-        runInAction(()=>{
-          this.todoForm = new TodoFormValues(todoForm);
-        })
+       const todoForm = this.todos.find((x) => x.id === id);
+       // alert(id);
+        this.todoForm = new TodoFormValues(todoForm);
+       // runInAction(()=>{
+      //    this.todoForm = new TodoFormValues(todoForm);
+        //})
       }
     } catch (error) {
-      
+      console.log(error);
     }
-
  }
+ 
  setTodo = (values:any)=>{
   runInAction(()=>{
     this.todos = values;
