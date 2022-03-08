@@ -2,6 +2,7 @@ import React from 'react';
 //import logo from './logo.svg';
 //import './App.css';
 import TodoList from "../src/components/todoList/TodoList";
+import UpdateForm from './components/todoListForm/UpdateForm';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 function App() {
@@ -29,7 +30,7 @@ function App() {
       <div >
         <Switch>
         <Route path="/" exact component = {TodoList}/>
-        <Route path="/update:id" exact component = {TodoList}/>
+        <Route path="/update/:id" exact component = {UpdateForm}/>
         </Switch>
       </div>
       </Router>

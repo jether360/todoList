@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useStore } from "../api/store/store";
 //import TodoListForm from "../todoListForm/TodoListForm";
+import {Link} from 'react-router-dom';
 
 const List = () =>{
 
@@ -37,14 +38,16 @@ const List = () =>{
               {item.todo}
               <Row gutter={10} justify="end" style={{ marginRight: "2%" }}>
                 <Col>
+                <Link to={"update/"+item.id}>
                   <FontAwesomeIcon
                     icon={faPenToSquare}
                     style={{ color: "#0077AE" }}
-                    onClick={()=>{
+                    //onClick={()=>{
                         //<TodoListForm id={item.id}/>
-                        setTodoForm(item.id)
-                    }}
+                     //   setTodoForm(item.id)
+                    //}}
                   />
+                </Link>
                 </Col>
                 <Col>
                   <FontAwesomeIcon

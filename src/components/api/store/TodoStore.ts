@@ -29,15 +29,18 @@ class TodoStore {
     }
   };
 
- setTodoForm = (id:any) => {
+ setTodoForm = (id?:any | undefined) => {
     try {
       if(id){
        const todoForm = this.todos.find((x) => x.id === id);
        // alert(id);
-        this.todoForm = new TodoFormValues(todoForm);
-       // runInAction(()=>{
-      //    this.todoForm = new TodoFormValues(todoForm);
-        //})
+       // this.todoForm = new TodoFormValues(todoForm);
+      
+       //window.location.reload();
+        runInAction(()=>{
+         this.todoForm = new TodoFormValues(todoForm);
+        // debugger;
+        })
       }
     } catch (error) {
       console.log(error);
@@ -59,7 +62,7 @@ class TodoStore {
    }
    };
 
-   updateTodo = async (id: number, values: ITodoItem) => {
+   updateTodo = async (id: number, values:ITodoItem) => {
     try {
       const response = await Todo.update(id, values);
       this.todos = [response];

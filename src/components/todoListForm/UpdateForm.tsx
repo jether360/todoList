@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { Card, Col, Layout, Row } from "antd";
 import * as Yup from "yup";
 import { Form, Input, SubmitButton } from "formik-antd";
@@ -7,9 +7,15 @@ import { Formik } from "formik";
 import { ITodoItem } from "../api/models/todoList";
 import { useStore } from "../api/store/store";
 import { observer } from "mobx-react";
-//import { withRouter } from "react-router-dom";
+import { withRouter, useHistory } from "react-router-dom";
 
-
+type IParams = {
+  match: {
+    params: {
+      id: string;
+    };
+  };
+};
 
 const validationSchema = Yup.object().shape({
   todo: Yup.string().required("Required"),
@@ -17,20 +23,24 @@ const validationSchema = Yup.object().shape({
 
 const { Content } = Layout;
 //const {createTodo} = TodoStore;
-const TodoListForm = () => {
+const UpdateForm = ({
+  match: {
+    params: { id },
+  },
+}: IParams) => {
   const { todoStore } = useStore();
   const { createTodo, todoForm, setTodoForm } = todoStore;
   //const [data, setData] = useState([])
-  //console.warn("props",id)
-  
-  //useEffect(()=>{
-  //  setTodoForm(id);
-  //},[id, setTodoForm])
+  console.warn("props", id);
+
+  useEffect(() => {
+    setTodoForm(id);
+  }, [id, setTodoForm]);
 
   return (
     <Layout
       className="layout"
-      style={{  backgroundColor: "#fff", marginTop: "20px" }}
+      style={{ backgroundColor: "#fff", marginTop: "20px" }}
     >
       <Content>
         <Row justify="center" style={{ height: "100%" }}>
@@ -42,13 +52,13 @@ const TodoListForm = () => {
             ></Row>
             <Card className="todo-list-card">
               <Formik
-               enableReinitialize
+                enableReinitialize
                 validationSchema={validationSchema}
                 initialValues={todoForm}
                 onSubmit={(values: ITodoItem, { resetForm }) => {
                   if (values.todo != null) {
                     createTodo(values);
-                   // alert("Todo added successfully");
+                    // alert("Todo added successfully");
                     resetForm();
                     window.location.reload();
                     console.log(values.todo);
@@ -83,4 +93,4 @@ const TodoListForm = () => {
   );
 };
 
-export default observer(TodoListForm);
+export default observer(UpdateForm);
