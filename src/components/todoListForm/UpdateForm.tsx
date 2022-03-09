@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card, Col, Layout, Row } from "antd";
+import { Card, Col, Layout, Row, Spin } from "antd";
 import * as Yup from "yup";
 import { Form, Input, SubmitButton } from "formik-antd";
 import { Formik } from "formik";
@@ -7,12 +7,12 @@ import { Formik } from "formik";
 import { ITodoItem } from "../api/models/todoList";
 import { useStore } from "../api/store/store";
 import { observer } from "mobx-react";
-import { withRouter, useHistory } from "react-router-dom";
+import {  useHistory } from "react-router-dom";
 
 type IParams = {
   match: {
     params: {
-      id: string;
+      id: any;
     };
   };
 };
@@ -29,12 +29,14 @@ const UpdateForm = ({
   },
 }: IParams) => {
   const { todoStore } = useStore();
-  const { createTodo, todoForm, setTodoForm } = todoStore;
+  const { createTodo, todoForm, setTodoForm, updateForm, updateTodo, isLoading } = todoStore;
   //const [data, setData] = useState([])
-  console.warn("props", id);
+  //console.warn("props", id);
+  let history = useHistory();
 
   useEffect(() => {
     setTodoForm(id);
+    //window.location.reload();
   }, [id, setTodoForm]);
 
   return (
@@ -54,13 +56,20 @@ const UpdateForm = ({
               <Formik
                 enableReinitialize
                 validationSchema={validationSchema}
-                initialValues={todoForm}
+                initialValues={updateForm}
                 onSubmit={(values: ITodoItem, { resetForm }) => {
-                  if (values.todo != null) {
+                  if (!id) {
                     createTodo(values);
                     // alert("Todo added successfully");
                     resetForm();
                     window.location.reload();
+                    console.log(values.todo);
+                  }
+                  else{
+                   // updateForm(values);
+                     updateTodo(id,values);
+                    //window.location.reload();
+                    history.push("/");
                     console.log(values.todo);
                   }
                 }}

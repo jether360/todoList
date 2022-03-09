@@ -5,6 +5,7 @@ import TodoList from "../src/components/todoList/TodoList";
 import UpdateForm from './components/todoListForm/UpdateForm';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
+
 function App() {
   return (
     <div className="App">
@@ -30,7 +31,7 @@ function App() {
       <div >
         <Switch>
         <Route path="/" exact component = {TodoList}/>
-        <Route path="/update/:id" exact component = {UpdateForm}/>
+        <Route path="/update/:id" component = {UpdateForm}/>
         </Switch>
       </div>
       </Router>
