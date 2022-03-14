@@ -11,6 +11,7 @@ class TodoStore {
   updateForm: ITodoItem = new TodoFormValues();
   isLoading: boolean = true;
 
+
   constructor() {
     makeObservable(this, {
       todos: observable,
@@ -25,8 +26,37 @@ class TodoStore {
     try {
       if (todo != null) {
         const response = await Todo.createTodo(todo);
-        this.todos = [response];
+        runInAction(() => {
+          //this.todos = [response]; 
+          this.getAllTodo();
+        })
       }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  updateTodo = async (id: number, values: ITodoItem) => {
+    try {
+      const response = await Todo.update(id, values);
+      //this.todos = [response];
+      //return response;
+      runInAction(() => {
+        //this.todos = [response]; 
+        this.getAllTodo();
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  deleteTodo = async (id: any) => {
+    try {
+      const response = await Todo.deleteTodo(id);
+      runInAction(() => {
+        //this.todos = [response]; 
+        this.getAllTodo();
+      })
     } catch (error) {
       console.log(error);
     }
@@ -34,16 +64,14 @@ class TodoStore {
 
   setTodoForm = (id: number) => {
     try {
-      this.isLoading = true;
       if (id) {
         //const todoForm = this.todos.find((x) => x.id === id);
         // alert(id);
         // this.todoForm = new TodoFormValues(todoForm);
-        return this.getTodoById(id).then((values) => {
+        return this.getTodoById(id).then((values:any) => {
           runInAction(() => {
-            //debugger;
-            this.updateForm = new TodoFormValues(values);
-            this.isLoading = false;
+            debugger;
+            this.updateForm = new TodoFormValues(values.data);
           });
         });
       } else {
@@ -77,30 +105,16 @@ class TodoStore {
   getAllTodo = async () => {
     try {
       const response = await Todo.getAllTodos();
-      this.todos = [response];
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  updateTodo = async (id: number, values: ITodoItem) => {
-    try {
-      const response = await Todo.update(id, values);
       //this.todos = [response];
-      return response;
+      runInAction(() => {
+        this.todos = response.data;
+      });
     } catch (error) {
       console.log(error);
     }
   };
 
-  deleteTodo = async (id: any) => {
-    try {
-      const response = await Todo.deleteTodo(id);
-      window.location.reload();
-      return response;
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
+ 
 }
 export default TodoStore;

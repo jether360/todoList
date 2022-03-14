@@ -50,7 +50,7 @@ const TodoListForm = () => {
                     createTodo(values);
                    // alert("Todo added successfully");
                     resetForm();
-                    window.location.reload();
+                    //window.location.reload();
                     console.log(values.todo);
                   }
                 }}

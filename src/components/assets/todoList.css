@@ -19,13 +19,13 @@
 }
 
 .todo-list-form-btn {
-  background-color: #00BCD4;
+  background-color: pink;
   border-radius: 8px;
   border: none;
 }
 
 .todo-list-card {
-  border: 2px solid #00BCD4;
+  border: 2px solid red;
   border-radius: 8px;
   width: 100%;
 }

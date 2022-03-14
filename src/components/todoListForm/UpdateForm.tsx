@@ -37,7 +37,7 @@ const UpdateForm = ({
   useEffect(() => {
     setTodoForm(id);
     //window.location.reload();
-  }, [id, setTodoForm]);
+  }, []);
 
   return (
     <Layout
